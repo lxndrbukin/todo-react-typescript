@@ -3,11 +3,17 @@ import { GoPlus } from 'react-icons/go';
 import Button from './reusable/Button';
 
 class CreateTask extends React.Component {
+  state = {
+    task: '',
+  };
+
   handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
   };
 
-  handleChange = (e: React.ChangeEvent): void => {};
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    this.setState({ task: e.target.value });
+  };
 
   render(): JSX.Element {
     return (
@@ -16,7 +22,7 @@ class CreateTask extends React.Component {
           <input
             className='w-full text-xl focus:outline-none m-auto'
             onChange={this.handleChange}
-            value={task}
+            value={this.state.task}
             placeholder='Create new task...'
           />
           <Button

@@ -1,11 +1,13 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { AppProps } from './types/types';
+import { connect } from 'react-redux';
+import { TasksState } from '../store/reducers/tasksReducer';
 import Header from './Header';
 import CreateTask from './CreateTask';
 import Tasks from './Tasks';
 
-class App extends React.Component<AppProps> {
+class _App extends React.Component<AppProps> {
   constructor(props: AppProps) {
     super(props);
   }
@@ -43,4 +45,16 @@ class App extends React.Component<AppProps> {
   }
 }
 
-export default App;
+const mapStateToProps = ({
+  activeTasks,
+  deletedTasks,
+  completedTasks,
+}: TasksState) => {
+  return {
+    activeTasks,
+    deletedTasks,
+    completedTasks,
+  };
+};
+
+export const App = connect(mapStateToProps, {})(_App);
