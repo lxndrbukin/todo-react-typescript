@@ -1,14 +1,21 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { createTask } from '../store/actions';
 import { GoPlus } from 'react-icons/go';
 import Button from './reusable/Button';
 
-class CreateTask extends React.Component {
+interface CreateTaskProps {
+  createTask: Function;
+}
+
+class CreateTask extends React.Component<CreateTaskProps> {
   state = {
     task: '',
   };
 
   handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
+    this.props.createTask(this.state.task);
   };
 
   handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -38,4 +45,4 @@ class CreateTask extends React.Component {
   }
 }
 
-export default CreateTask;
+export default connect(null, { createTask })(CreateTask);

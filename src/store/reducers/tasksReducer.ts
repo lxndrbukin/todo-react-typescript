@@ -1,3 +1,5 @@
+import { Action, ActionTypes } from '../actions';
+
 interface Task {
   id: string;
   data: string;
@@ -15,9 +17,9 @@ const initialState: TasksState = {
   deletedTasks: [],
 };
 
-export const tasksReducer = (state: TasksState = initialState, action: any): TasksState => {
+export const tasksReducer = (state: TasksState = initialState, action: Action): TasksState => {
   switch (action.type) {
-    case 'CREATE_TASK':
+    case ActionTypes.createTask:
       return { activeTasks: [...state.activeTasks, action.payload], completedTasks: [...state.completedTasks], deletedTasks: [...state.deletedTasks] };
     default:
       return state;
