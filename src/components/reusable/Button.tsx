@@ -8,14 +8,11 @@ interface ButtonTypes {
   light: string;
 }
 
-interface ButtonProps {
-  [key: string]: any;
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  buttonType: keyof ButtonTypes;
 }
 
 class Button extends React.Component<ButtonProps> {
-  constructor(props: ButtonProps) {
-    super(props);
-  }
 
   get buttonTypes(): ButtonTypes {
     return {

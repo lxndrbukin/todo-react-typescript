@@ -2,15 +2,13 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { AppProps } from './types/types';
 import { connect } from 'react-redux';
+import { StoreState } from '../store/reducers';
 import { TasksState } from '../store/reducers/tasksReducer';
 import { Header } from './Header';
 import CreateTask from './CreateTask';
 import Tasks from './Tasks';
 
 class _App extends React.Component<AppProps> {
-  constructor(props: AppProps) {
-    super(props);
-  }
 
   render(): JSX.Element {
     return (
@@ -45,15 +43,11 @@ class _App extends React.Component<AppProps> {
   }
 }
 
-const mapStateToProps = ({
-  activeTasks,
-  deletedTasks,
-  completedTasks,
-}: TasksState) => {
+const mapStateToProps = ({tasks}: StoreState): TasksState => {
   return {
-    activeTasks,
-    deletedTasks,
-    completedTasks,
+    activeTasks: tasks.activeTasks,
+    deletedTasks: tasks.deletedTasks,
+    completedTasks: tasks.completedTasks,
   };
 };
 

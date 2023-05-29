@@ -1,10 +1,8 @@
 import React from 'react';
 import { Task, TasksProps } from './types/types';
+import TaskItem from './TaskItem';
 
 class Tasks extends React.Component<TasksProps> {
-  constructor(props: TasksProps) {
-    super(props);
-  }
 
   renderedList(): JSX.Element[] {
     return this.props.taskList.map((task: Task) => {

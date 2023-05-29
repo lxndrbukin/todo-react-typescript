@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { TasksState } from '../store/reducers/tasksReducer';
+import { StoreState } from '../store/reducers';
 import { Link } from 'react-router-dom';
 import Button from './reusable/Button';
 import { Task } from './types/types';
@@ -12,6 +13,7 @@ interface HeaderProps {
 }
 
 class _Header extends React.Component<HeaderProps> {
+
   render(): JSX.Element {
     return (
       <header className='bg-gradient-to-r from-sky-600 to-sky-700 h-80 w-full absolute z-0 flex flex-col'>
@@ -40,15 +42,11 @@ class _Header extends React.Component<HeaderProps> {
   }
 }
 
-const mapStateToProps = ({
-  activeTasks,
-  completedTasks,
-  deletedTasks,
-}: TasksState) => {
+const mapStateToProps = ({tasks}: StoreState): TasksState => {
   return {
-    activeTasks,
-    deletedTasks,
-    completedTasks,
+    activeTasks: tasks.activeTasks,
+    deletedTasks: tasks.deletedTasks,
+    completedTasks: tasks.completedTasks,
   };
 };
 
