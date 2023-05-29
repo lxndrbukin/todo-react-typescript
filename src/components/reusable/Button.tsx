@@ -9,10 +9,7 @@ interface ButtonTypes {
 }
 
 interface ButtonProps {
-  buttonType: keyof ButtonTypes;
-  className?: string;
-  children?: React.ReactNode;
-  type?: string;
+  [key: string]: any;
 }
 
 class Button extends React.Component<ButtonProps> {

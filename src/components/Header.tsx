@@ -1,8 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { TasksState } from '../store/reducers/tasksReducer';
 import { Link } from 'react-router-dom';
 import Button from './reusable/Button';
+import { Task } from './types/types';
 
-class Header extends React.Component {
+interface HeaderProps {
+  activeTasks: Task[];
+  completedTasks: Task[];
+  deletedTasks: Task[];
+}
+
+class _Header extends React.Component<HeaderProps> {
   render(): JSX.Element {
     return (
       <header className='bg-gradient-to-r from-sky-600 to-sky-700 h-80 w-full absolute z-0 flex flex-col'>
@@ -31,4 +40,16 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+const mapStateToProps = ({
+  activeTasks,
+  completedTasks,
+  deletedTasks,
+}: TasksState) => {
+  return {
+    activeTasks,
+    deletedTasks,
+    completedTasks,
+  };
+};
+
+export const Header = connect(mapStateToProps, {})(_Header);

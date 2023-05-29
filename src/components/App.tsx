@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { AppProps } from './types/types';
 import { connect } from 'react-redux';
 import { TasksState } from '../store/reducers/tasksReducer';
-import Header from './Header';
+import { Header } from './Header';
 import CreateTask from './CreateTask';
 import Tasks from './Tasks';
 
