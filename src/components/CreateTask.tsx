@@ -1,4 +1,6 @@
 import React from 'react';
+import { StoreState } from '../store/reducers';
+import { Task } from './types/types';
 import { connect } from 'react-redux';
 import { createTask } from '../store/actions';
 import { GoPlus } from 'react-icons/go';
@@ -6,6 +8,7 @@ import Button from './reusable/Button';
 
 interface CreateTaskProps {
   createTask: Function;
+  activeTasks: Task[];
 }
 
 class CreateTask extends React.Component<CreateTaskProps> {
@@ -16,6 +19,7 @@ class CreateTask extends React.Component<CreateTaskProps> {
   handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     this.props.createTask(this.state.task);
+    this.setState({ task: '' });
   };
 
   handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -45,4 +49,10 @@ class CreateTask extends React.Component<CreateTaskProps> {
   }
 }
 
-export default connect(null, { createTask })(CreateTask);
+const mapStateToProps = ({ tasks }: StoreState) => {
+  return {
+    activeTasks: tasks.activeTasks,
+  };
+};
+
+export default connect(mapStateToProps, { createTask })(CreateTask);

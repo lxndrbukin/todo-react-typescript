@@ -13,7 +13,6 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 class Button extends React.Component<ButtonProps> {
-
   get buttonTypes(): ButtonTypes {
     return {
       primary: 'text-white bg-sky-600 border border-sky-600 rounded p-2.5',
@@ -25,8 +24,10 @@ class Button extends React.Component<ButtonProps> {
   }
 
   render(): JSX.Element {
+    const { buttonType, ...rest } = this.props;
     return (
       <button
+        {...rest}
         className={`${this.buttonTypes[this.props.buttonType]} ${
           this.props.className
         } mx-0.5 flex flex-row`}

@@ -1,7 +1,10 @@
-import { CreateTaskAction } from './tasks';
+import { CreateTaskAction, DeleteTaskAction, CompleteTaskAction, EditTaskAction } from './tasks';
 
 export enum ActionTypes {
-  createTask
+  createTask,
+  completeTask,
+  deleteTask,
+  editTask
 }
 
-export type Action = CreateTaskAction;
+export type Action = CreateTaskAction | DeleteTaskAction | CompleteTaskAction | EditTaskAction;

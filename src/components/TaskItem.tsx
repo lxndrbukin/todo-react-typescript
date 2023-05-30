@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { deleteTask, completeTask, editTask } from '../store/actions';
 import { Task } from './types/types';
 import { GoPencil, GoTrashcan, GoFile } from 'react-icons/go';
 import { MdDoneOutline } from 'react-icons/md';
@@ -7,6 +9,9 @@ import Button from './reusable/Button';
 interface TaskItemProps {
   task: Task;
   showButtons: boolean;
+  deleteTask: typeof deleteTask;
+  completeTask: typeof completeTask;
+  editTask: typeof editTask;
 }
 
 interface StateProps {
@@ -22,11 +27,25 @@ class TaskItem extends React.Component<TaskItemProps, StateProps> {
 
   handleChangeTask = (e: React.ChangeEvent<HTMLInputElement>): void => {
     e.preventDefault();
-  }
+    this.setState({ taskData: e.target.value });
+  };
 
-  handleUpdateTask = (): void => {}
+  handleUpdateTask = (): void => {
+    this.props.editTask(this.props.task, this.state.taskData);
+    this.setState({ showUpdateForm: false });
+  };
 
-  handleUpdateForm = () => {}
+  handleDeleteTask = (): void => {
+    this.props.deleteTask(this.props.task);
+  };
+
+  handleCompleteTask = (): void => {
+    this.props.completeTask(this.props.task);
+  };
+
+  handleUpdateForm = (): void => {
+    this.setState({ showUpdateForm: true });
+  };
 
   renderButtons(): JSX.Element | null {
     if (this.props.showButtons) {
@@ -41,20 +60,20 @@ class TaskItem extends React.Component<TaskItemProps, StateProps> {
           </Button>
           <Button
             buttonType='success'
-            onClick={() => {}}
+            onClick={this.handleCompleteTask}
             className='h-10 w-10'
           >
             <MdDoneOutline />
           </Button>
           <Button
             buttonType='danger'
-            onClick={() => {}}
+            onClick={this.handleDeleteTask}
             className='h-10 w-10'
           >
             <GoTrashcan />
           </Button>
         </div>
-      )
+      );
     }
     return null;
   }
@@ -95,4 +114,4 @@ class TaskItem extends React.Component<TaskItemProps, StateProps> {
   }
 }
 
-export default TaskItem;
+export default connect(null, { deleteTask, completeTask, editTask })(TaskItem);
